@@ -1,0 +1,71 @@
+#include <iostream>
+#include <string.h>
+using namespace std;
+int main() {
+    string input1;
+    cin>>input1;
+    string pattern;
+    cin>>pattern;
+    string input=pattern+'$'+input1;
+    int len=pattern.length();
+   int k=input.length();
+   cout<<k<<endl;
+    int l,r=0;
+    int z[k]={0};
+    for(int i=1;i<k;i++){
+        if(i>r){
+             int count=0;
+            for(int p=0,j=i; p,i<k; p++,j++){
+                
+                if(input[j]==input[p]){
+                    count++;
+                }
+                else{
+                    break;
+                }
+            }
+            z[i]=count;
+            r=i+z[i]-1;
+            l=i;
+        }
+        else if (i<=r){
+                if(z[i-l]<r-i+1){
+                    z[i]=z[i-l];
+                    l=l;
+                    r=r;
+                }
+                if(z[i-l]>=r-i+1){
+                    int count1=0;
+                    for(int m=(r-i+1),n=r+1; m,n<k;m++,n++){
+                        
+                        if(input[n]==input[m]){
+                            count1++;
+                        }
+                        else {
+                            break;
+                        }
+                    }
+                    l=i;
+                    r=r+count1;
+                    z[i]=r-i+1;
+                    
+                    
+                    
+                    
+                }
+            }
+            
+         }
+    for(int i=0; i<k;i++){
+            cout<<z[i];
+        }
+        int count3=0;
+        for(int i=0;i<k;i++){
+            if(z[i]==len){
+                count3++;
+            }
+        }
+    cout<<endl<<count3;
+
+    return 0;
+}
